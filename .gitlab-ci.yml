@@ -1,0 +1,66 @@
+image: docker:latest
+
+variables:
+    DOCKER_TAG: ${CI_BUILD_REF_NAME}_${CI_PIPELINE_ID}
+    DOCKER_NAME: ${CI_PROJECT_NAME}:${CI_BUILD_REF_NAME}_${CI_PIPELINE_ID}
+
+stages:
+    - testing
+    - building
+    - uploading
+    - delivering
+    - killing
+    - clearing
+    
+codestyle:
+    stage: testing
+    image: python:latest
+    script:
+        - pip install pycodestyle
+        - pycodestyle --show-source . --ignore=E501 > codestyle_report
+    allow_failure: true
+  
+    artifacts:
+        when: on_failure
+        paths:
+            - ./codestyle_report
+            
+test:
+    stage: testing
+    script:
+        - docker build -t test:$DOCKER_TAG -f Testing .
+        - docker run --name ${CI_PROJECT_NAME}_test -p 0.0.0.0:8000:8000 --link db:db test:$DOCKER_TAG
+        - docker cp ${CI_PROJECT_NAME}_test:/usr/src/app/htmlcov .
+    artifacts:
+        paths:
+            - ./htmlcov
+    after_script:
+        - docker rm -f ${CI_PROJECT_NAME}_test
+        - docker rmi -f test:$DOCKER_TAG
+    allow_failure: true
+    
+build:
+    stage: building
+    script:
+        - docker build -t ${docker_username}/$DOCKER_NAME .
+        
+uplaod:
+    stage: uploading
+    needs: ['build']
+    script:
+        - docker login --username ${docker_username} --password ${docker_password}
+        - docker push ${docker_username}/$DOCKER_NAME
+        
+delivery:
+    stage: delivering
+    needs: ['build']
+    script:
+        - docker run -d --rm --name ${CI_PROJECT_NAME} -p 0.0.0.0:8000:8000 --link db:db ${docker_username}/$DOCKER_NAME
+
+kill:
+    stage: killing
+    when: manual
+    script:
+        - docker rm -f ${CI_PROJECT_NAME}
+        - docker rmi ${docker_username}/$DOCKER_NAME
+    allow_failure: true

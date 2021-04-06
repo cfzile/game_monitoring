@@ -1,0 +1,123 @@
+.top_profile{
+  width: 5%;
+  vertical-align: middle;
+  height: 100%;
+  float: right;
+  /* background:blue; */
+}
+
+.top_profile .profile_img{
+  display: inline-block;
+  position: relative;
+  /* background: white; */
+  float:left;
+  width: 100%;
+  margin-top: 10%;
+  height: 80%;
+  /* padding: 2%; */
+}
+
+#top_profile_name{
+  display: none;
+  width: 70%;
+  text-align: center;
+  /* vertical-align: middle; */
+  color: white;
+  font-family: "PTSans";
+  padding: 2%;
+}
+
+#top_profile_name span{
+
+  margin-top: 12%;
+  display: inline-block;
+
+}
+
+.top_profile .profile_img img{
+  border-collapse: separate;
+  border-radius: 100%;
+}
+
+.top_profile .profile_img img:hover{
+  box-shadow: 0px 0px 20px 0px rgba(255,255,255,0.75);
+  border-collapse: separate;
+  border-radius: 100%;
+}
+
+.top_profile_menu{
+  background: white;
+  position: absolute;
+  width: 10%;
+  right: 2%;
+  padding: 1% 1% 0 1%;
+  margin-top: 5%;
+  color: #0D0D0D;
+  font-size: 80%;
+  z-index: 1000;
+  box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.75);
+}
+
+.top_profile_menu ul{
+  width: 100%;
+  padding: 0;
+  font-size: 80%;
+  list-style: none;
+}
+
+.top_profile_menu ul li{
+  padding: 1% 2%;
+  font-family: "PTSans";
+  margin-top: 5%;
+  border-bottom: 1px solid #0D0D0D;
+}
+
+.top_profile_menu ul li a{
+  color: #0D0D0D;
+  text-decoration: none;
+}
+
+.top_profile_menu ul li a:active,
+.top_profile_menu ul li a:hover,
+.top_profile_menu ul li a:focus{
+  color: #D5D7D6;
+}
+
+.profile_main_block{
+  /*float: left;*/
+  text-align: left;
+  width: 60%;
+  margin-left: 20%;
+  min-height: 73%;
+  padding: 2%;
+  /*margin-top: 5%;*/
+  margin-bottom: 1%;
+  /*background: #F2F2F2;*/
+  box-shadow: 0px 0px 5px -2px rgba(0,0,0,0.3);
+}
+
+.profile_main_block .avatar{
+  width: 45%;
+  float: right;
+  box-shadow: 0px 0px 5px -2px rgba(0,0,0,0.3);
+}
+
+.profile_main_block .info{
+  width: 45%;
+  display: inline-block;
+  margin-left: 5%;
+}
+
+.profile_main_block .info .item{
+  width: 100%;
+  display: inline-block;
+  margin-bottom: 5%;
+}
+
+.profile_main_block .info .item .item_name{
+  font-weight: bold;
+}
+
+.profile_main_block .info h1{
+  font-size: 180%;
+}

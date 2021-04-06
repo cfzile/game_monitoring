@@ -1,0 +1,160 @@
+{% extends 'monitoring/index.html' %}
+{% load static %}
+
+{% block content %}
+
+    <div class="main_block_place_table">
+
+        <table class="place_table">
+
+            <tr>
+                <td style="width: 5%"></td>
+                <td style="width: 15%"></td>
+                <td style="width: 30%">Цена</td>
+                <td style="width: 50%">Период</td>
+            </tr>
+
+            {% for place in places %}
+
+                <tr>
+                    <td><input type="checkbox" class="add_in_basket" id="buy_{{ place.id }}"></td>
+                    <td id="name_pos_{{ place.id }}">{{ place.name }}</td>
+                    <td><span class="price" id="price_{{ place.id }}">{{ place.price }}</span> руб/день </td>
+                    <td>
+                        <label for="from">От</label>
+                        <input type="text" id="{{ place.id }}_from" name="from">
+                        <label for="to">по</label>
+                        <input type="text" id="{{ place.id }}_to" name="to">
+                    </td>
+                </tr>
+
+                <script type="text/javascript">
+
+                    d1 = new Date();
+
+                    $( function() {
+
+                        var from = $( "#{{ place.id }}_from" ).datepicker({
+                            minDate: d1,
+                            changeMonth: true,
+                            numberOfMonths: 3,
+                            beforeShowDay: function(date){
+                                var string = jQuery.datepicker.formatDate('{{ constance.DATE_FORMAT_JS }}', date);
+                                var array = "{{ place.disabled_dates|safe}}";
+                                return [ array.indexOf(string) === -1 ]
+                            },
+                            disabledDates: {{ place.disabled_dates|safe}}
+                        })
+                        .on( "change", function() {
+                            to.datepicker( "option", "minDate", getDate(this));
+                        });
+
+                        var to = $( "#{{ place.id }}_to" ).datepicker({
+                            defaultDate: "+1w",
+                            changeMonth: true,
+                            numberOfMonths: 3,
+                            minDate: d1,
+                            beforeShowDay: function(date){
+                                var string = jQuery.datepicker.formatDate('{{ constance.DATE_FORMAT_JS }}', date);
+                                var array = "{{ place.disabled_dates|safe}}";
+                                return [ array.indexOf(string) === -1 ]
+                            }
+                        })
+                        .on( "change", function() {
+                            from.datepicker( "option", "maxDate", getDate( this ) );
+                        });
+
+                        function getDate( element ) {
+                            var date;
+                            try {
+                                date = $.datepicker.parseDate('{{ constance.DATE_FORMAT_JS }}', element.value);
+                            } catch( error ) {
+                                date = null;
+                            }
+
+                            return date;
+                        }
+
+                    });
+                </script>
+
+            {% endfor %}
+
+
+        </table>
+
+{#        <table class="place_table">#}
+{##}
+{#            <tr>#}
+{#                <td style="width: 5%"></td>#}
+{#                <td style="width: 5%">Игра</td>#}
+{#                <td style="width: 5%">Топ</td>#}
+{#                <td style="width: 15%">Номер места</td>#}
+{#                <td style="width: 30%">Период</td>#}
+{#                <td style="width: 50%">Цена</td>#}
+{#            </tr>#}
+{#            <tr>#}
+{#                <td><input type="checkbox" class="add_in_basket"></td>#}
+{#                <td>#}
+{#                    <select>#}
+{#                        <option>CSS v34</option>#}
+{#                    </select>#}
+{#                </td>#}
+{#                <td>#}
+{#                    <select>#}
+{#                        <option>Топ места</option>#}
+{#                        <option>Таблица</option>#}
+{#                    </select>#}
+{#                </td>#}
+{#                <td>#}
+{#                    <input type="number">#}
+{#                </td>#}
+{#                <td>#}
+{#                    <label for="from">От</label>#}
+{#                    <input type="text" id="{{ place.id }}_from" name="from">#}
+{#                    <label for="to">по</label>#}
+{#                    <input type="text" id="{{ place.id }}_to" name="to">#}
+{#                </td>#}
+{#                <td>-</td>#}
+{#            </tr>#}
+{#        </table>#}
+
+        <script type="text/javascript" src=" {%  static "monitoring/js/buy.js" %}"></script>
+
+        <table class="check_list" id="check_list">
+            <tr>
+                <td colspan="3">Итоговый чек</td>
+            </tr>
+        </table>
+
+        <table class="check_list total_sum">
+            <tr>
+                <td colspan="2"><b>Итог</b></td>
+                <td><b><span id="total_check">0</span> руб.</b></td>
+            </tr>
+        </table>
+
+        <div class="pay_block">
+            <form action="{% url 'buy_place' %}" method="POST">
+                {% csrf_token %}
+                <input type="text" name="ip" placeholder="ip" required>
+                <input type="number" name="port" placeholder="port" required>
+                <input type="email" name="email" placeholder="e-mail" required>
+                <div class="agree_checkbox"><input type="checkbox" name="agree" required> Я принимаю условия <a href="{% url 'offer' %}" style="color: #0D0D0D">договора-оферты</a></div> <br>
+                <br>
+                <input type="submit" value="Оплатить заказ">
+            </form>
+            <br>
+            <p style="display: inline-block; text-align: left; font-size: 80%">
+                <b>*</b> занятые дни автоматически вычитаются из выбранного вами периода. <br>
+                <b>*</b> при покупке N-го места в таблице, вам гарантируется, что ваш сервер будет размещен в топе N таблицы, то есть если вы купили место 2 в таблице, а место 1 в таблице свободно, то ваш сервер будет помещен на место 1. <br>
+                <b>*</b> указывайте настоящий e-mail адрес, так как чек об оплате и вся информация о заказе будут высланы именно по этому адресу, также при возникновении проблем с заказом связь с вами будет осуществляться через данный e-mail. <br>
+                <b>*</b> при нажатие кнопки "Оплатить заказ" система бронирует выбранные вами места на 3 минуты, то есть оплату нужно провести в течение этого времени. <br>
+                <b>*</b> на указанный e-mail будет выслана информация о заказе, с которой следует ознакомиться перед оплатой.
+            </p>
+        </div>
+
+
+    </div>
+
+{% endblock %}

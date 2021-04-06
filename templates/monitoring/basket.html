@@ -1,0 +1,44 @@
+{% extends 'monitoring/index.html' %}
+{% load static %}
+
+{% block link %}
+{#    <script src="https://raw.githubusercontent.com/phstc/jquery-dateFormat/master/dist/jquery-dateformat.js"></script>#}
+{% endblock %}
+
+{% block content %}
+
+    <div class="main_block" style="text-align: center;">
+
+        <table class="check_list" id="check_list" style="display:inline-block; float: none; width: 50%">
+            <tr>
+                <td colspan="3">Итоговый чек</td>
+            </tr>
+            {% for place, date_from, date_to, num_days, sum in basket %}
+
+                <tr>
+                    <td>{{ place.name }}</td>
+                    <td>от {{ date_from }} <br> до {{ date_to }} <br> {{ num_days }} дней
+                    <td>{{ sum }} руб.</td>
+                </tr>
+
+            {% endfor %}
+
+            <tr style="border-top: 2px solid #0D0D0D">
+                <td colspan="2"><b>Итог</b></td>
+                <td><b><span id="total_check">{{ total_sum }}</span> руб.</b></td>
+            </tr>
+
+        </table>
+
+        <p style="display:inline-block; width:50%; text-align: center">На указанную почту было выслано письмо с подробной информаций и условиями покупки, ознакомтесь прежде чем оплачивать!</p>
+        <form>
+            {% csrf_token %}
+            <input type="hidden" value="{{ order_id }}" name="order_id">
+            <a  class="button" style="padding: 1% 2%;" href="">
+            Оплатить
+            </a>
+
+        </form>
+
+    </div>
+{% endblock %}

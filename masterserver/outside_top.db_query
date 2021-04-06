@@ -1,0 +1,1 @@
+SELECT * FROM monitoring_server WHERE monitoring_server.ordered=FALSE  and monitoring_server.status = 'connected'

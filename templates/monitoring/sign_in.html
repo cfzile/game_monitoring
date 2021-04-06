@@ -1,0 +1,18 @@
+{% extends 'monitoring/index.html' %}
+
+{% block content %}
+
+    <div class="main_block">
+
+        <form class="login" method="post" action="{% url 'sign_in' %}">
+            <h1>Войти</h1>
+              {% csrf_token %}
+            <input type="text" placeholder="username" name="username" maxlength="50" required>
+            <input type="password" placeholder="password" name="password" maxlength="50" required>
+            <a href="" class="forgot_password">Забыли пароль?</a>
+            <input type="submit" value="Войти">
+        </form>
+
+    </div>
+
+{% endblock %}

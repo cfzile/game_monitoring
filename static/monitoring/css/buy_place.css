@@ -1,0 +1,181 @@
+.main_block_place_table{
+  float: left;
+  text-align: center;
+  width: 90%;
+  padding: 2% 5%;
+}
+
+.place_table{
+  float: left;
+  position: relative;
+  display: inline-block;
+  width: 50%;
+  min-height: 75%;
+  color: #0D0D0D;
+  font-family: "PTSans";
+  border-collapse: collapse;
+  /*background: #fbfaf6;*/
+  font-size: 90%;
+}
+
+.place_table td{
+  padding: 1% 1% 1% 1%;
+  text-align: center;
+  /*width: auto;*/
+  /*min-width: 20%;*/
+  border: 1px dotted #1FA88C;
+}
+
+.place_table tr:first-child td{
+  border: 1px solid #1FA88C;
+  padding: 1% 1%;
+  /* border-bottom: 5px solid #024873; */
+}
+
+.place_table tr:nth-child(1){
+  background: #1FA88C;
+  color: white;
+  font-weight: bold;
+}
+
+.place_table .price{
+    font-weight: bold;
+    font-size: 110%;
+}
+
+input[type=checkbox] {
+    -webkit-appearance: none;
+    height:25px;
+    width: 25px;
+    display:inline-block;
+    line-height:25px;
+    background-repeat:no-repeat;
+    background-position: 0 0;
+    font-size:25px;
+    vertical-align:middle;
+    cursor:pointer;
+    background: #D5D7D6;
+}
+
+input[type=checkbox]:checked {
+    background-position-y: 25px;
+    background-image:url("../img/checkbox.png");
+    border: none;
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+.place_table tr:first-child td:first-child{
+    background: white;
+    border: 0;
+}
+
+.place_table tr:first-child td:nth-child(2){
+    background: white;
+    border: 0;
+}
+
+.place_table input[type=text]{
+    width: 35%;
+    text-align: center;
+    padding: 1% 2% 1% 2%;
+}
+
+.check_list{
+  float: right;
+  position: relative;
+  width: 45%;
+  color: #0D0D0D;
+  font-family: "PTSans";
+  border-collapse: collapse;
+  /*background: #fbfaf6;*/
+  font-size: 100%;
+  padding: 0;
+}
+
+.check_list td{
+    display: table-cell;
+    padding: 5% 2%;
+}
+
+.check_list tr:first-child{
+    background: #1FA88C;
+    color: white;
+    text-align: center;
+    font-weight: bold;
+}
+
+.check_list tr:first-child td{
+    padding: 1% 2%;
+}
+
+.total_sum td{
+    border-top: 2px solid #0D0D0D;
+    background: white;
+    color: #0D0D0D;
+    text-align: left;
+}
+
+.check_list tr td:first-child{
+    width: 50%;
+}
+
+.check_list tr td:nth-child(2){
+    width: 30%;
+}
+
+.check_list tr td:nth-child(3){
+    width: 20%;
+}
+
+.main_block_place_table .pay_block{
+    margin-top: 5%;
+    width: 45%;
+    float: right;
+}
+
+.main_block_place_table .pay_block input[type=email],
+.main_block_place_table .pay_block input[type=text],
+.main_block_place_table .pay_block input[type=number]{
+    width: 50%;
+    float: left;
+    padding: 2% 5%;
+}
+
+.main_block_place_table .pay_block input[type=number]{
+    width: 45%;
+    float: right;
+}
+
+.main_block_place_table .pay_block input[type=submit]{
+    padding: 2% 5%;
+    margin: 5% 0;
+    float: right;
+}
+
+.main_block_place_table .pay_block input[type=submit]:hover{
+    background: #1FA88C;
+}
+
+.agree_checkbox{
+    float: left;
+    width: 100%;
+    display: inline;
+    text-align: center;
+    margin-bottom: 1%;
+}
+
+.total_sum tr td:first-child{
+    padding: 2% 5%;
+    width: 70%;
+}
+
+.total_sum tr td:last-child{
+    padding: 2% 5%;
+    width: 30%;
+}
+

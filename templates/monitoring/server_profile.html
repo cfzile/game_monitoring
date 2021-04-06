@@ -1,0 +1,15 @@
+{% extends "monitoring/index.html" %}
+{% load general %}
+
+{% block content %}
+    <div class="profile_main_block">
+        <div class="info">
+            <h1 style="margin:0; margin-bottom: 5%">{{ server.name }}</h1>
+            <div class="item"><span class="item_name">ID:</span> {{ server.id }}</div>
+            <div class="item"><span class="item_name">Aдрес:</span> {{ server.ip }}:{{ server.port }}</div>
+            <div class="item"><span class="item_name">Карта:</span> {{ server.map_name }}</div>
+            <div class="item"><span class="item_name">Игроки:</span> {{ server.player_count }}/{{ server.max_players }}</div>
+        </div>
+        <div class="avatar"><img width="100%" src="{% media server.avatar|stringformat:"s" %}"></div>
+    </div>
+{% endblock %}

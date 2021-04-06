@@ -1,0 +1,14 @@
+{% extends "monitoring/index.html" %}
+{% load general %}
+
+{% block content %}
+    <div class="profile_main_block">
+        <div class="info">
+            <h1 style="margin:0; margin-bottom: 5%">{{ profile.user.username }}</h1>
+            <div class="item"><span class="item_name">ID:</span> {{ profile.user_id }}</div>
+            <div class="item"><span class="item_name">E-mail:</span> {{ profile.user.email }}</div>
+            <div class="item"><span class="item_name">Servers:</span> {{ profile.servers }}</div>
+        </div>
+        <div class="avatar"><img width="100%" src="{% media profile.avatar|stringformat:"s" %}"></div>
+    </div>
+{% endblock %}

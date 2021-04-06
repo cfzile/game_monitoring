@@ -1,0 +1,15 @@
+{% load general %}
+<div class="top_servers">
+
+    {% for server in premium_servers %}
+        <div class="server">
+            <div class="server_img"><img width="100%" height="100%" src="{% media server.avatar|stringformat:"s" %}" alt="{{ server.name }}"></div>
+            <span class="server_name"><a class='item' style="text-align: center; height: 2.2em;" href="{% if server.id != None %}{% url "server_profile" server.id %}{% endif %}">{{ server.name }}</a><br>
+                 <span class="item"> <b>Карта:</b> {{ server.map_name }}</span><br>
+                 <span class="item"> <b>Игроки:</b> {{ server.player_count }}/{{ server.max_players }}</span><br>
+                 </span><br>
+                <span class="server_ip">{{server.ip}}:{{server.port}}</span>
+        </div>
+    {% endfor %}
+
+</div>

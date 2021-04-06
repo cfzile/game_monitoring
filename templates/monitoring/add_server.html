@@ -1,0 +1,31 @@
+{% extends 'monitoring/index.html' %}
+{% load static %}
+
+{% block head %}
+    <link href="{% static "monitoring/css/add_server.css" %}" rel="stylesheet" type="text/css">
+{% endblock %}
+
+{% block content %}
+
+    <div class="main_block">
+
+        <form class="login" method="post" action="{% url 'add_server' %}">
+            <h1>Добавить сервер</h1>
+            {% csrf_token %}
+            {% for field in form %}
+                {{ field }} <br>
+            {% endfor %}
+            <input type="submit" value="Добавить">
+        </form>
+
+        <div class="additional_info">
+            <p> Можно добавлять только активные сервера CS:S v34 (1.0.0.34). <br>
+                Сервера не проявляющие активность более трех дней автоматически удаляются из мониторинга. <br>
+                При возникновении проблем обращайтесь в техподдержку: <a href="mailto:{{ constance.administrator_email }}" style="text-decoration: underline; color: #0D0D0D;">{{ constance.administrator_email }}</a>.
+            </p>
+
+        </div>
+
+    </div>
+
+{% endblock %}

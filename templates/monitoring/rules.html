@@ -1,0 +1,70 @@
+{% load static %}
+{% load general %}
+
+<html lang="en" dir="ltr">
+
+<head>
+
+    <meta charset="utf-8">
+
+    <title>{{ Title }}</title>
+
+    <link href="{% static "monitoring/css/general.css" %}" rel="stylesheet" type="text/css">
+    <link href="{% static "monitoring/css/login.css" %}" rel="stylesheet" type="text/css">
+    <link href="{% static "monitoring/css/errors.css" %}" rel="stylesheet" type="text/css">
+    <link href="{% static "monitoring/css/profile.css" %}" rel="stylesheet" type="text/css">
+    <link href="{% static "monitoring/css/buy_place.css" %}" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+
+    <script src="http://code.jquery.com/jquery-3.3.1.js" crossorigin="anonymous"
+            integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60="></script>
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <link rel="icon" href="{% static 'monitoring/img/icon.png' %}">
+
+    <style>
+        body {
+            padding: 3%;
+            width: 94%;
+            min-width: 200px;
+        }
+
+        ol > li {
+            {#display: inline-block;#}
+            margin-top: 2%;
+        }
+    </style>
+</head>
+
+<body>
+
+<h1>Правила</h1>
+
+<ol>
+
+<li>Запрещено:
+    <ul>
+        <li>
+            Ставить редирект любого вида.
+        </li>
+        <li> Вводить в заблуждение игроков, показывая им совершенно другую карту, которая не стоит в данный момент на
+            сервере.
+        </li>
+        <li> Ставить фейк слоты на сервер.
+        </li>
+        <li> Накручивать онлайн, вводя этим людей в заблуждение.
+        </li>
+    </ul>
+</li>
+
+    <li>
+        Невозможна передача или перепродажа услуг другим лицам. Сервер, который выключен более 3 дней будет удаляться с услуги.
+    </li>
+    <li>
+    Если администрация нашего мониторинга посчитает ваш сервер некачественным (исходя из вышеперечисленных пунктов, и многих других факторов) для игроков, то он будет забанен в мониторинге, средства будут вам возвращены.
+    </li>
+    <li>Заказывая платную услугу вы соглашаетесь со всеми пунктами правил и обязуетесь их выполнять.</li>
+</ol>
+</body>
+
+</html>

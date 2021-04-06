@@ -1,0 +1,67 @@
+form{
+  font-family: "PTSans";
+}
+
+form.login{
+  width: 30%;
+  text-align: center;
+  margin-left: 35%;
+}
+
+form h1{
+  font-size: 200%;
+  font-family: "PTSans";
+  color: #0D0D0D;
+}
+
+form input[type="text"], form input[type="password"], form input[type="number"], form input[type="email"]{
+  width: 100%;
+  margin-bottom: 5%;
+  padding: 3% 5% 3% 5%;
+}
+
+form input[type="submit"]{
+  padding: 5% 8% 5% 8%;
+  border-radius: 2px;
+  margin-right: 0;
+  font-size: 100%;
+  font-family: "PTSans";
+  border: 0px;
+  color: white;
+  background: #0D0D0D;
+}
+
+form.login input[type="submit"]{
+  float: right;
+}
+
+form.login .forgot_password{
+  display: inline-block;
+  margin-top: 5%;
+  text-decoration: underline;
+  font-size: 80%;
+  color: #0D0D0D;
+}
+
+form.login input[type="submit"]:active,
+form.login input[type="submit"]:hover{
+  /* color: white; */
+  background: #1FA88C;
+}
+
+form.login input:hover,
+form.login input:active,
+form.login input:focus{
+  /* color: white; */
+  /* background: #1FA88C; */
+  /* border: 2px solid #1FA88C; */
+  box-shadow: none;
+  outline: none;
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    /* display: none; <- Crashes Chrome on hover */
+    -webkit-appearance: none;
+    margin: 0; /* <-- Apparently some margin are still there even though it's hidden */
+}

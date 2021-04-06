@@ -1,0 +1,1 @@
+SELECT * FROM monitoring_server WHERE monitoring_server.status = 'connected' limit 100

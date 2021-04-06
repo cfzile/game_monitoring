@@ -1,0 +1,5 @@
+Django
+psycopg2
+Pillow
+python-a2s
+django-background-tasks

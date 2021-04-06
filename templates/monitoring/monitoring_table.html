@@ -1,0 +1,85 @@
+{% extends 'monitoring/index.html' %}
+
+{% block content %}
+
+{% include "monitoring/premium_servers.html" %}
+
+<div class="monitoring_table">
+
+    <table>
+
+        <tr>
+            <td></td>
+            <td>Имя сервера</td>
+            <td>Карта</td>
+            <td>Игроки</td>
+            <td>IP сервера</td>
+            {#<td>Статус</td>#}
+{#            <td>Баллы</td>#}
+            {#<td>Проголосовать</td>#}
+        </tr>
+
+        {% for server in servers %}
+            <tr>
+                <td>{{ server.position_in_table }}</td>
+                <td><a href="{% if server.id != None %}{% url "server_profile" server.id %}{% endif %}">{{ server.name }}</a></td>
+                <td>{{ server.map_name }}</td>
+                <td>{{ server.player_count }}/{{ server.max_players }}</td>
+                <td>{{ server.ip }}:{{ server.port }}</td>
+{#                <td id="num_points_{{ server.id }}">{{ server.num_points }}</td>#}
+                {#<td><button formaction="{% url 'add_voice' %}" id="{{ server.id }}" class='voice_button' name="{{ server.ip }}">+</button></td>#}
+            </tr>
+        {% endfor %}
+
+    </table>
+
+    {# table navigation #}
+
+    <ul class="monitoring_pages">
+        {% for num in pages %}
+            <li>
+                <a class="{% if num == page %} selected {% endif %}"
+                   href="{% url "monitoring_table" num %}">{{ num }}</a>
+            </li>
+        {% endfor %}
+    </ul>
+
+</div>
+
+<script type="text/javascript">
+    function getCookie(name) {
+    var cookieValue = null;
+    if (document.cookie && document.cookie != '') {
+        var cookies = document.cookie.split(';');
+        for (var i = 0; i < cookies.length; i++) {
+            var cookie = jQuery.trim(cookies[i]);
+            // Does this cookie string begin with the name we want?
+            if (cookie.substring(0, name.length + 1) == (name + '=')) {
+                cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                break;
+            }
+        }
+    }
+    return cookieValue;
+}
+
+          $(".voice_button").on("click", function(){
+              server_id = $(this).attr("id");
+              $.ajax({
+                    url: "{% url 'add_voice' %}",
+                    type: "POST",
+                    headers: { "X-CSRFToken": getCookie('csrftoken')},
+                    data: "server=" + server_id,
+                    statusCode: {
+                        200: function (response) {
+                            data = $.parseJSON(JSON.stringify(response));
+                            $("#num_points_"+server_id).text(data['results']);
+                        }
+                    }
+             });
+
+        });
+
+</script>
+
+{% endblock %}

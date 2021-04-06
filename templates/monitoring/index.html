@@ -1,0 +1,110 @@
+{% load static %}
+{% load general %}
+
+<html lang="en" dir="ltr">
+
+    <head>
+
+        <meta charset="utf-8">
+        <meta name="description" CONTENT="Мониторинг серверов CS:S v34. Продвижение серверов CS:S v34. Подобрать сервер CS:S v34 по названию, карте, игрокам.">
+        <meta name="keywords" content="сервера cssv34, сервера css v34, css v34, продвижение серверов css, сервера контер страйк, найти сервер css, мониторинг серверов css, css v34 сервера">
+
+        <title>{{ Title }}</title>
+
+        <link href="{% static "monitoring/css/general.css" %}" rel="stylesheet" type="text/css">
+        <link href="{% static "monitoring/css/login.css" %}" rel="stylesheet" type="text/css">
+        <link href="{% static "monitoring/css/errors.css" %}" rel="stylesheet" type="text/css">
+        <link href="{% static "monitoring/css/profile.css" %}" rel="stylesheet" type="text/css">
+        <link href="{% static "monitoring/css/buy_place.css" %}" rel="stylesheet" type="text/css">
+        <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+
+        <script src="http://code.jquery.com/jquery-3.3.1.js" crossorigin="anonymous"
+                                            integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60="></script>
+        <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+        <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+
+        <link rel="icon" href="{% static 'monitoring/img/icon.png' %}">
+
+        {% block head %}
+        {% endblock %}
+
+        <!-- Yandex.Metrika counter -->
+        <script type="text/javascript" >
+           (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+           m[i].l=1*new Date();k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})
+           (window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");
+
+           ym(65526193, "init", {
+                clickmap:true,
+                trackLinks:true,
+                accurateTrackBounce:true,
+                webvisor:true
+           });
+        </script>
+        <noscript><div><img src="https://mc.yandex.ru/watch/65526193" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+        <!-- /Yandex.Metrika counter -->
+
+    </head>
+
+    <body>
+
+        {#  errors block #}
+
+        {% include "monitoring/events.html" %}
+
+        {# header block #}
+
+        <header>
+
+            <span class="logo">{% logo %}</span>
+
+{#            {% if cur_user_profile.user.iEs_authenticated %}#}
+
+{#                <div class="top_profile">#}
+{#                    <div class="profile_img"><img style="height: 100%" src="{% media cur_user_profile.avatar|stringformat:"s" %}"></div>#}
+{#                    <div id="top_profile_name"><span>zile</span></div>#}
+{#                </div>#}
+{##}
+{#                <div class="top_profile_menu" style="display:none">#}
+{#                    Зашел(а) как <b>{{ cur_user_profile.user.username }}</b>#}
+{#                    <ul>#}
+{#                        <li><a href="{% url 'profile' cur_user_profile.user.id %}">Мой профель</a></li>#}
+{#                        <li><a href="profile_servers">Мои сервера</a></li>#}
+{#                        <li><a href="profile_bills">Мои счета</a></li>#}
+{#                        <li><a href="{% url "sign_out" %}">Выход</a></li>#}
+{#                    </ul>#}
+{#                </div>#}
+
+{#            {% else %}#}
+{#                <a href="{% url "sign_up" %}"><button>Регистрация</button></a>#}
+{#                <a href="{% url "sign_in" %}"><button>Вход</button></a>#}
+{#            {% endif %}#}
+
+            <ul class="main_menu">
+                <li class="{{ selected_monitoring }}"><a href="/">Сервера CS:S v34</a></li>
+{#                <li class="{{ selected_rating }}"><a href="/rating">Рейтинг</a></li>#}
+                <li class="{{ selected_add_server }}"><a href="{% url 'add_server' %}">Добавить сервер</a></li>
+                <li class="{{ selected_buy_place }}"><a href="{% url 'buy_place' %}">Купить место</a></li>
+                <li><a href="{% url 'offer' %}" target="_blank">Договор оферты</a></li>
+                <li><a href="{% url 'rules' %}" target="_blank">Правила</a></li>
+{#                <li><a href="{% url 'rules' %}" target="_blank">Новости</a></li>#}
+{#                <li class="{{ selected_faq }}"><a href="{% url 'faq' %}">FAQ</a></li>#}
+                <li><a style="color: #F26444" href="https://yadi.sk/d/PGngcVIDSla2pA" target="_blank">Скачать CS:S v34</a></li>
+            </ul>
+
+        </header>
+        {# end header block #}
+
+        {% block content %} {% endblock %}
+
+        {# footer block #}
+
+        <footer>
+            <p> © {% logo %}, c 2020 года. Техподдержка <a href="mailto:{{ constance.administrator_email }}" style="text-decoration: underline; color: #0D0D0D;">{{ constance.administrator_email }}</a>.</p>
+        </footer>
+
+        <script src="{% static "monitoring/js/general.js" %}" type="text/javascript"></script>
+
+    </body>
+
+</html>

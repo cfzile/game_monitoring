@@ -1,0 +1,1 @@
+SELECT * FROM monitoring_server, monitoring_order, monitoring_place WHERE monitoring_order.date_from <= now() and monitoring_order.date_to >= now() and monitoring_order.active=TRUE and monitoring_place.id = monitoring_order.place_id and monitoring_place.status=0 and monitoring_server.id=monitoring_order.server_id and monitoring_server.status = 'connected'
